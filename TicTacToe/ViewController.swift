@@ -52,10 +52,18 @@ class ViewController: UIViewController {
         bl.addGestureRecognizer(tapGestureRecognizer9)
     }
     
-    func saveMove(imageView:UIImageView) {
+    func saveMove(imageView:UIImageView) -> Bool {
+        
+        var savedMove = false
         
         switch imageView {
-        case tl: tlv = drawX
+        case tl:
+            if let tlval = tlv {
+                print("already a value")
+            } else {
+                tlv = drawX
+                savedMove = true
+            }
         case tr: trv = drawX
         case tm: tmv = drawX
         default: break
@@ -64,7 +72,7 @@ class ViewController: UIViewController {
 //        if imageView == tl {
 //            tlv = drawX
 //        }
-        
+        return savedMove
     }
     
 
@@ -78,16 +86,18 @@ class ViewController: UIViewController {
             
             let gesture = sender as! UITapGestureRecognizer
             let tappedImage = gesture.view as! UIImageView
-            saveMove(tappedImage)
-            tappedImage.image = UIImage(named: "x")
-            drawX = false
+            if saveMove(tappedImage) {
+                tappedImage.image = UIImage(named: "x")
+                drawX = false
+            }
         } else {
             
             let gesture = sender as! UITapGestureRecognizer
             let tappedImage = gesture.view as! UIImageView
-            saveMove(tappedImage)
-            tappedImage.image = UIImage(named: "o")
-            drawX = true
+            if saveMove(tappedImage) {
+                tappedImage.image = UIImage(named: "o")
+                drawX = true
+            }
         }
         
         
