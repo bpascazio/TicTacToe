@@ -64,8 +64,20 @@ class ViewController: UIViewController {
                 tlv = drawX
                 savedMove = true
             }
-        case tr: trv = drawX
-        case tm: tmv = drawX
+        case tr:
+            if let trval = trv {
+                print("already a value")
+            } else {
+                trv = drawX
+                savedMove = true
+            }
+        case tm:
+            if let tmval = tmv {
+                print("already a value")
+            } else {
+                tmv = drawX
+                savedMove = true
+            }
         default: break
         }
 
