@@ -132,7 +132,40 @@ class ViewController: UIViewController {
         return savedMove
     }
     
-
+    func checkSequence(v1:Bool?, v2:Bool?, v3:Bool?) -> Bool {
+        
+        var win = false
+        
+        if let v1u = v1, v2u = v2, v3u = v3 {
+            
+            if v1u == v2u && v2u == v3u {
+                
+                win = true
+            }
+        }
+        
+        return win
+    }
+    
+    func checkForWins() {
+    
+        var win = false
+        
+        win = checkSequence(tlv, v2: tmv, v3: trv)
+        
+        if win {
+            
+            // create the alert
+            let alert = UIAlertController(title: "TicTacToe", message: "Win!", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            // add the actions (buttons)
+            alert.addAction(UIAlertAction(title: "Replay", style: UIAlertActionStyle.Default, handler: nil))
+            
+            // show the alert
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
     func imageTapped(sender: AnyObject)
     {
         print("image tapped")
@@ -157,14 +190,7 @@ class ViewController: UIViewController {
             }
         }
         
-        
-        // TODO 3: Change the image according to the logic class with code
-        // similar to this
-        //        let gesture = sender as! UITapGestureRecognizer
-        //        let imageView = gesture.view as! UIImageView
-        //        imageView.image = UIImage(named:"o")
-        
-        
+        checkForWins()
     }
     
     override func didReceiveMemoryWarning() {
